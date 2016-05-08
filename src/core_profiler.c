@@ -81,7 +81,8 @@ static void formats(char *s) {
 
 
 /* computes new stack and new timer */
-void lprofP_callhookIN(lprofP_STATE* S, char *func_name, char *file, int linedefined, int currentline) {	
+void lprofP_callhookIN(lprofP_STATE* S, char *func_name, char *file, int linedefined, int currentline) {
+    if(S == NULL) return;
   S->stack_level++;
   lprofM_enter_function(S, file, func_name, linedefined, currentline);
 }
@@ -91,7 +92,7 @@ void lprofP_callhookIN(lprofP_STATE* S, char *func_name, char *file, int linedef
 /* returns if there is another function in the stack */
 int lprofP_callhookOUT(lprofP_STATE* S) {
 
-  if (S->stack_level == 0) {
+  if (S == NULL ||S->stack_level == 0) {
     return 0;
   }
 
@@ -157,7 +158,8 @@ lprofP_STATE* lprofP_init_core_profiler(const char *_out_filename, int isto_prin
     randstr[strlen(randstr)-1]='\0';
 
   sprintf(auxs, out_filename, randstr);
-  outf = fopen(auxs, "a");
+    printf("%s", auxs);
+  outf = fopen(auxs, "w");
   if (!outf) {
     return 0;
   }

@@ -75,7 +75,7 @@ void lprofM_pause_local_time(lprofP_STATE* S) {
 void lprofM_pause_total_time(lprofP_STATE* S) {
   lprofS_STACK aux;
 
-  ASSERT(S->stack_top, "pause_total_time: stack_top null");
+  //ASSERT(S->stack_top, "pause_total_time: stack_top null");
 
   /* auxiliary stack */
   aux = S->stack_top;
